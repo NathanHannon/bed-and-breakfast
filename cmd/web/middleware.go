@@ -4,7 +4,6 @@ import (
 	"net/http"
 
 	"github.com/justinas/nosurf"
-	""
 )
 
 // NoSurf adds Cross-Site Request Forgery protection on every POST request
