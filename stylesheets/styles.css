@@ -1,0 +1,32 @@
+.carousel-caption {
+    width: auto;
+    padding: 10px;
+    height: auto;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37);
+    overflow: hidden;
+    border: 1px solid rgba( 255, 255, 255, 0.18);
+    color: black;
+}
+
+.reference {
+    font-size: 90%;
+}
+
+.my-footer {
+    background-color: #163b65;
+    margin-top: 1.5em;
+    height: 5em;
+    padding: 1em;
+    color: white;
+    font-size: 80%;
+}
+
+.room-image {
+    max-width: 50%;
+}
+
+.room-reference {
+    align-items: center;
+}
