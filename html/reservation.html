@@ -53,7 +53,7 @@
                 <div class="col-md-3"></div>
                 <div class="col-md-6">
                     <h1 class="mt-5">Search for availability</h1>
-                    <form action="reservation.html" method="GET">
+                    <form action="reservation.html" method="GET" class="needs-validation" novalidate>
 
                         <div class="form-row">
                             <div class="col">
@@ -61,8 +61,11 @@
                                     <label for="start_date">Starting Date</label>
                                     <input type="date" class="form-control" id="start_date" name="start_date"
                                         aria-describedby="start_date_help" required>
-                                    <small id="start_date_help" class="form-text text-muted">Please enter your starting
+                                    <small id="start_date_help" class="form-text text-muted">Please enter a starting
                                         date.</small>
+                                    <div class="invalid-feedback">
+
+                                    </div>
                                 </div>
                             </div>
                             <div class="col">
@@ -70,8 +73,10 @@
                                     <label for="end_date">Ending Date</label>
                                     <input type="date" class="form-control" id="end_date" name="end_date"
                                         aria-describedby="end_date_help" required>
-                                    <small id="end_date_help" class="form-text text-muted">Please enter your ending
+                                    <small id="end_date_help" class="form-text text-muted">Please enter an ending
                                         date.</small>
+                                    <div class="invalid-feedback">
+                                    </div>
                                 </div>
                             </div>
                         </div>
