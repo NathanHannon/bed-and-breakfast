@@ -43,23 +43,116 @@ function notifyModal(title, text, icon, confirmationButtonText) {
     })
 }
 
-// JavaScript module for prompting users
+// JavaScript module for alerts and toasts
 function Prompt() {
-    let toast = function () {
-        console.log("clicked button and got toast")
+    let toast = function (c) {
+        const {
+            message = "",
+            icon = "success",
+            position = "top-end",
+        } = c;
+        const Toast = Swal.mixin({
+            toast: true,
+            title: message,
+            position: position,
+            icon: icon,
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+
+        Toast.fire({
+
+        })
     }
-    let success = function () {
-        console.log("clicked button and got success")
+    let success = function (c) {
+        const {
+            message = "",
+            title = "",
+            footer = ""
+        } = c
+
+        Swal.fire({
+            icon: 'success',
+            title: title,
+            text: message,
+            footer: footer
+        })
+    }
+    let error = function (c) {
+        const {
+            message = "",
+            title = "",
+            footer = ""
+        } = c
+
+        Swal.fire({
+            icon: 'error',
+            title: title,
+            text: message,
+            footer: footer
+        })
+    }
+    async function custom(c) {
+        const {
+            message = "",
+            title = "",
+        } = c;
+
+        const { value: formValues } = await Swal.fire({
+            title: title,
+            html: message,
+            backdrop: false,
+            focusConfirm: false,
+            showCancelButton: true,
+            willOpen: () => {
+                const elem = document.getElementById('reservation-date-modal');
+                const rp = new DateRangePicker(elem, {
+                    format: 'yyyy-mm-dd',
+                    showOnFocus: true,
+                })
+            },
+            preConfirm: () => {
+                return [
+                    document.getElementById('start').value,
+                    document.getElementById('end').value
+                ]
+            }
+        })
+
+        if (formValues) {
+            Swal.fire(JSON.stringify(formValues))
+        }
     }
     return {
         toast: toast,
         success: success,
+        error: error,
+        custom: custom,
     }
 }
 
 // Test Button
 document.getElementById("btnTest").addEventListener("click", function () {
-    // notify("This is my Message", "warning");
-    // notifyModal("title", "<em>Hello World!</em>", "success", "Text for my Button");
-    attention.success();
+    let html = `
+        <form id="check-availability-form action="" method=" POST" class="needs-validation" novalidate>
+            <div class="form-row">
+                <div class="col">
+                    <div class="form-row" id="reservation-date-modal">
+                        <div class="col">
+                            <input type="text" class="form-control" name="start" required placeholder="Arrival Date" />
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control" name="end" required placeholder="Departure Date" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    `
+    attention.custom({ message: html, title: "Choose your dates" });
 })
