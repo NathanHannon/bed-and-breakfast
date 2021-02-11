@@ -1,3 +1,5 @@
+/* Carousel sizing */
+
 .carousel-caption {
     width: auto;
     padding: 10px;
@@ -10,9 +12,13 @@
     color: black;
 }
 
+/* Carousel picture reference text */
+
 .reference {
     font-size: 90%;
 }
+
+/* Footer styling */
 
 .my-footer {
     background-color: #163b65;
@@ -23,10 +29,20 @@
     font-size: 80%;
 }
 
+/* Room pictures from Unsplash */
+
 .room-image {
     max-width: 50%;
 }
 
+/* Unsplash picture reference styling */
+
 .room-reference {
     align-items: center;
+}
+
+/* Notie notification styling */
+
+.notie-container {
+    box-shadow: none;
 }
