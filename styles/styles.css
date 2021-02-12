@@ -46,3 +46,9 @@
 .notie-container {
     box-shadow: none;
 }
+
+/* Custom Date Picker Styling */
+
+.datepicker {
+    z-index: 10000;
+}

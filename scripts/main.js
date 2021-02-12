@@ -45,6 +45,7 @@ function notifyModal(title, text, icon, confirmationButtonText) {
 
 // JavaScript module for alerts and toasts
 function Prompt() {
+    // Toasts
     let toast = function (c) {
         const {
             message = "",
@@ -97,6 +98,7 @@ function Prompt() {
             footer: footer
         })
     }
+    // Custom alert modal
     async function custom(c) {
         const {
             message = "",
@@ -110,17 +112,22 @@ function Prompt() {
             focusConfirm: false,
             showCancelButton: true,
             willOpen: () => {
-                const elem = document.getElementById('reservation-date-modal');
+                const elem = document.getElementById('reservation-dates-modal');
                 const rp = new DateRangePicker(elem, {
                     format: 'yyyy-mm-dd',
                     showOnFocus: true,
                 })
             },
             preConfirm: () => {
+                console.log("this worked");
                 return [
                     document.getElementById('start').value,
                     document.getElementById('end').value
                 ]
+            },
+            didOpen: () => {
+                document.getElementById('start').removeAttribute('disabled');
+                document.getElementById('end').removeAttribute('disabled');
             }
         })
 
@@ -139,15 +146,15 @@ function Prompt() {
 // Test Button
 document.getElementById("btnTest").addEventListener("click", function () {
     let html = `
-        <form id="check-availability-form action="" method=" POST" class="needs-validation" novalidate>
+        <form id="check-availability-form action="" method="POST" class="needs-validation" novalidate>
             <div class="form-row">
                 <div class="col">
-                    <div class="form-row" id="reservation-date-modal">
+                    <div class="form-row" id="reservation-dates-modal">
                         <div class="col">
-                            <input type="text" class="form-control" name="start" required placeholder="Arrival Date" />
+                            <input disabled required type="text" class="form-control" id="start" placeholder="Arrival Date" />
                         </div>
                         <div class="col">
-                            <input type="text" class="form-control" name="end" required placeholder="Departure Date" />
+                            <input disabled required type="text" class="form-control" id="end" placeholder="Departure Date" />
                         </div>
                     </div>
                 </div>
