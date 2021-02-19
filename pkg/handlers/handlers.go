@@ -63,3 +63,8 @@ func (m *Repository) Generals(w http.ResponseWriter, r *http.Request) {
 func (m *Repository) Majors(w http.ResponseWriter, r *http.Request) {
 	render.Template(w, "majors.page.tmpl", &models.TemplateData{})
 }
+
+// Contact renders the Contact page
+func (m *Repository) Contact(w http.ResponseWriter, r *http.Request) {
+	render.Template(w, "contact.page.tmpl", &models.TemplateData{})
+}
