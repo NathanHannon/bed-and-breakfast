@@ -27,12 +27,6 @@ function notify(message, messageType) {
     })
 }
 
-// Custom date picker with the vanillajs-datepicker library 
-const elem = document.getElementById('reservationDates');
-const rangepicker = new DateRangePicker(elem, {
-    format: "yyyy-mm-dd"
-});
-
 // Modal function with the sweetalert2 library
 function notifyModal(title, text, icon, confirmationButtonText) {
     Swal.fire({
@@ -142,24 +136,23 @@ function Prompt() {
         custom: custom,
     }
 }
-
-// Test Button
-document.getElementById("btnTest").addEventListener("click", function () {
+// Book now button
+document.getElementById("check-availability-button").addEventListener("click", function () {
     let html = `
-        <form id="check-availability-form action="" method="POST" class="needs-validation" novalidate>
-            <div class="form-row">
-                <div class="col">
-                    <div class="form-row" id="reservation-dates-modal">
-                        <div class="col">
-                            <input disabled required type="text" class="form-control" id="start" placeholder="Arrival Date" />
-                        </div>
-                        <div class="col">
-                            <input disabled required type="text" class="form-control" id="end" placeholder="Departure Date" />
-                        </div>
+    <form id="check-availability-form action="" method="POST" class="needs-validation" novalidate autocomplete="off">
+        <div class="form-row">
+            <div class="col">
+                <div class="form-row" id="reservation-dates-modal">
+                    <div class="col">
+                        <input disabled required type="text" class="form-control" id="start" placeholder="Arrival Date" />
+                    </div>
+                    <div class="col">
+                        <input disabled required type="text" class="form-control" id="end" placeholder="Departure Date" />
                     </div>
                 </div>
             </div>
-        </form>
-    `
+        </div>
+    </form>
+`
     attention.custom({ message: html, title: "Choose your dates" });
 })

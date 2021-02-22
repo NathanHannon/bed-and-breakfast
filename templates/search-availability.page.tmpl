@@ -7,7 +7,7 @@
         <div class="col-md-3"></div>
         <div class="col-md-6">
             <h1 class="mt-5">Search for availability</h1>
-            <form action="" method="GET" class="needs-validation" novalidate>
+            <form action="" method="GET" class="needs-validation" novalidate autocomplete="off">
                 <div class="form-row">
                     <div class="col">
                         <div class="form-row" id="reservationDates">
@@ -28,5 +28,17 @@
         </div>
     </div>
 </div>
+
+{{end}}
+
+{{define "js"}}
+
+<script>
+    // Custom date picker with the vanillajs-datepicker library 
+    const elem = document.getElementById('reservationDates');
+    const rangepicker = new DateRangePicker(elem, {
+        format: "yyyy-mm-dd"
+    });
+</script>
 
 {{end}}
