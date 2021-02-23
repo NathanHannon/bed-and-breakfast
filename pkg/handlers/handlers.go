@@ -54,6 +54,11 @@ func (m *Repository) Availability(w http.ResponseWriter, r *http.Request) {
 	render.Template(w, "search-availability.page.tmpl", &models.TemplateData{})
 }
 
+// PostAvailability renders the search availability page
+func (m *Repository) PostAvailability(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("Posted to search availabaility"))
+}
+
 // Generals renders the General's Quarters room page
 func (m *Repository) Generals(w http.ResponseWriter, r *http.Request) {
 	render.Template(w, "generals.page.tmpl", &models.TemplateData{})
