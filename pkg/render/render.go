@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"path/filepath"
 
+	"github.com/justinas/nosurf"
 	"github.com/nathanhannon/bed-and-breakfast/pkg/config"
 	"github.com/nathanhannon/bed-and-breakfast/pkg/models"
 )
@@ -23,12 +24,13 @@ func NewTemplates(a *config.AppConfig) {
 }
 
 // DefaultData handles data which will be on all pages
-func DefaultData(td *models.TemplateData) *models.TemplateData {
+func DefaultData(td *models.TemplateData, r *http.Request) *models.TemplateData {
+	td.CSRFToken = nosurf.Token(r)
 	return td
 }
 
 // Template renders the templates using html/template
-func Template(w http.ResponseWriter, tmpl string, td *models.TemplateData) {
+func Template(w http.ResponseWriter, r *http.Request, tmpl string, td *models.TemplateData) {
 	var tc map[string]*template.Template
 
 	if app.UseCache {
@@ -46,7 +48,7 @@ func Template(w http.ResponseWriter, tmpl string, td *models.TemplateData) {
 
 	// Byte buffer
 	buf := new(bytes.Buffer)
-	td = DefaultData(td)
+	td = DefaultData(td, r)
 	_ = t.Execute(buf, td)
 
 	//Writes the template from the byte buffer to the response writer
