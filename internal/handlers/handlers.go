@@ -6,9 +6,9 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/nathanhannon/bed-and-breakfast/pkg/config"
-	"github.com/nathanhannon/bed-and-breakfast/pkg/models"
-	"github.com/nathanhannon/bed-and-breakfast/pkg/render"
+	"github.com/nathanhannon/bed-and-breakfast/internal/config"
+	"github.com/nathanhannon/bed-and-breakfast/internal/models"
+	"github.com/nathanhannon/bed-and-breakfast/internal/render"
 )
 
 // Repo is the repository used by the handlers

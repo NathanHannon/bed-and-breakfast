@@ -9,8 +9,8 @@ import (
 	"path/filepath"
 
 	"github.com/justinas/nosurf"
-	"github.com/nathanhannon/bed-and-breakfast/pkg/config"
-	"github.com/nathanhannon/bed-and-breakfast/pkg/models"
+	"github.com/nathanhannon/bed-and-breakfast/internal/config"
+	"github.com/nathanhannon/bed-and-breakfast/internal/models"
 )
 
 const templateDir = "./templates/"
