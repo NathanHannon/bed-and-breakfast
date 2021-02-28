@@ -67,14 +67,12 @@
                 const rp = new DateRangePicker(elem, {
                     format: 'yyyy-mm-dd',
                     showOnFocus: true,
-                    minDate: new Date(),
                 })
             },
 
             didOpen: () => {
                 document.getElementById('start').removeAttribute('disabled');
                 document.getElementById('end').removeAttribute('disabled');
-
             },
 
             callback: function (result) {
@@ -83,7 +81,6 @@
                 let form = document.getElementById("check-availability-form");
                 let formData = new FormData(form);
                 formData.append("csrf_token", "{{.CSRFToken}}");
-                formData.append("room_id", "1");
 
                 fetch('/search-availability-json', {
                     method: "post",
