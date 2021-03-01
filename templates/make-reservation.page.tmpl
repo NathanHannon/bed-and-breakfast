@@ -10,13 +10,16 @@
             <form method="POST" action="" class="" novalidate>
                 <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
                 <div class="form-group mt-5">
-                    <label for="first-name">First Name:</label>
-                    <input type="text" name="first-name" id="first-name" class="form-control" required
-                        autocomplete="off">
+                    <label for="first_name">First Name:</label>
+                    {{with .Form.Errors.Get "first_name"}}
+                    <label class="text-danger">{{.}}</label>
+                    {{end}}
+                    <input class="form-control" id="first_name" autocomplete="off" type='text' name='first_name'
+                        required>
                 </div>
                 <div class="form-group">
-                    <label for="last-name">Last Name:</label>
-                    <input type="text" name="last-name" id="last-name" class="form-control" required autocomplete="off">
+                    <label for="last_name">Last Name:</label>
+                    <input type="text" name="last_name" id="last_name" class="form-control" required autocomplete="off">
                 </div>
                 <div class="form-group">
                     <label for="email">Email:</label>

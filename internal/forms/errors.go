@@ -13,6 +13,5 @@ func (e errors) Get(field string) string {
 	if len(es) == 0 {
 		return ""
 	}
-
 	return es[0]
 }
