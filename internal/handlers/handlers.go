@@ -39,7 +39,6 @@ func (m *Repository) Home(w http.ResponseWriter, r *http.Request) {
 
 // About is the about page handler
 func (m *Repository) About(w http.ResponseWriter, r *http.Request) {
-
 	stringMap := make(map[string]string)
 	stringMap["test"] = "Hello again."
 	// sends data to the template
@@ -89,6 +88,15 @@ func (m *Repository) PostReservation(w http.ResponseWriter, r *http.Request) {
 		})
 		return
 	}
+
+	m.App.Session.Put(r.Context(), "reservation", reservation)
+
+	http.Redirect(w, r, "/reservation-summary", http.StatusSeeOther)
+}
+
+// ReservationSummary renders a table with the reservation form data
+func (m *Repository) ReservationSummary(w http.ResponseWriter, r *http.Request) {
+	render.Template(w, r, "reservation-summary.page.tmpl", &models.TemplateData{})
 }
 
 // Availability renders the search availability page
