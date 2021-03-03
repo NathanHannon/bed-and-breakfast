@@ -50,8 +50,13 @@ func (m *Repository) About(w http.ResponseWriter, r *http.Request) {
 
 // Reservation renders the reservation page and the accompanying form
 func (m *Repository) Reservation(w http.ResponseWriter, r *http.Request) {
+	var emptyReservation models.Reservation
+	data := make(map[string]interface{})
+	data["reservation"] = emptyReservation
+
 	render.Template(w, r, "make-reservation.page.tmpl", &models.TemplateData{
 		Form: forms.New(nil),
+		Data: data,
 	})
 }
 
@@ -68,8 +73,11 @@ func (m *Repository) PostReservation(w http.ResponseWriter, r *http.Request) {
 		Phone:     r.Form.Get("phone"),
 		Email:     r.Form.Get("email"),
 	}
+
 	form := forms.New(r.PostForm)
-	form.Has("first_name", r)
+	form.Required("first_name", "last_name", "email")
+	form.MinLength("first_name", 3, r)
+	form.IsEmail("email")
 
 	if !form.Valid() {
 		data := make(map[string]interface{})
@@ -107,7 +115,7 @@ func (m *Repository) AvailabilityJSON(w http.ResponseWriter, r *http.Request) {
 		OK:      true,
 		Message: "Available!",
 	}
-	out, err := json.MarshalIndent(resp, "", "   ")
+	out, err := json.MarshalIndent(resp, "", "    ")
 	if err != nil {
 		log.Panicln(err)
 	}
