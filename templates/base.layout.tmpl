@@ -125,6 +125,19 @@
                 })
             }
 
+            // Pushes backend errors to notifications
+            {{with .Error}}
+            notify("{{.}}", "error")
+            {{end}}
+
+            {{with .Flash}}
+            notify("{{.}}", "success")
+            {{end}}
+
+            {{with .Warning}}
+            notify("{{.}}", "warning")
+            {{end}}
+
             // JavaScript module for alerts and toasts
             function Prompt() {
                 // Toasts
