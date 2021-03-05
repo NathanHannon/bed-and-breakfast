@@ -21,6 +21,21 @@ var session *scs.SessionManager
 
 // main is the main function
 func main() {
+
+	err := run()
+
+	fmt.Println((fmt.Sprintf("Starting port number on port %s", portNumber)))
+
+	srv := &http.Server{
+		Addr:    portNumber,
+		Handler: routes(&app),
+	}
+	err = srv.ListenAndServe()
+	log.Fatal(err)
+}
+
+func run() error {
+
 	// What is going to be put into the session
 	gob.Register(models.Reservation{})
 
@@ -46,12 +61,5 @@ func main() {
 	handlers.NewHandlers(repo)
 	render.NewTemplates(&app)
 
-	fmt.Println((fmt.Sprintf("Starting port number on port %s", portNumber)))
-
-	srv := &http.Server{
-		Addr:    portNumber,
-		Handler: routes(&app),
-	}
-	err = srv.ListenAndServe()
-	log.Fatal(err)
+	return nil
 }
