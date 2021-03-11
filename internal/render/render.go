@@ -13,7 +13,7 @@ import (
 	"github.com/nathanhannon/bed-and-breakfast/internal/models"
 )
 
-const templateDir = "./templates/"
+const templatePath = "./templates/"
 
 var app *config.AppConfig
 var functions = template.FuncMap{}
@@ -63,10 +63,10 @@ func Template(w http.ResponseWriter, r *http.Request, tmpl string, td *models.Te
 
 // CreateTemplateCache creates a template cache as a map
 func CreateTemplateCache() (map[string]*template.Template, error) {
-	layoutPath := templateDir + "*.layout.tmpl"
+	layoutPath := fmt.Sprintf("%s*.layout.tmpl", templatePath)
 	myCache := map[string]*template.Template{}
 
-	pages, err := filepath.Glob(templateDir + "*.page.tmpl")
+	pages, err := filepath.Glob(fmt.Sprintf("%s*.page.tmpl", templatePath))
 	if err != nil {
 		return myCache, err
 	}
