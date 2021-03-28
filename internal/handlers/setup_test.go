@@ -53,7 +53,7 @@ func getRoutes() http.Handler {
 
 	// Middleware handlers
 	mux.Use(middleware.Recoverer)
-	mux.Use(NoSurf)
+	// mux.Use(NoSurf)
 	mux.Use(SessionLoad)
 
 	// Static file handler
@@ -129,9 +129,7 @@ func CreateTestTemplateCache() (map[string]*template.Template, error) {
 				return myCache, err
 			}
 		}
-
 		myCache[name] = ts
 	}
-
 	return myCache, nil
 }
