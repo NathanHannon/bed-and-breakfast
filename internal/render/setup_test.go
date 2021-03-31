@@ -15,6 +15,23 @@ import (
 var session *scs.SessionManager
 var testApp config.AppConfig
 
+// A dummy writer to satisfy response headers for testing
+type dummyWriter struct{}
+
+func (tw *dummyWriter) Header() http.Header {
+	var h http.Header
+	return h
+}
+
+func (tw *dummyWriter) WriteHeader(i int) {
+
+}
+
+func (tw *dummyWriter) Write(b []byte) (int, error) {
+	length := len(b)
+	return length, nil
+}
+
 func TestMain(m *testing.M) {
 	// What is going to be put into the session
 	gob.Register(models.Reservation{})

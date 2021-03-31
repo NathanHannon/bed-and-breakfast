@@ -14,7 +14,7 @@ import (
 	"github.com/nathanhannon/bed-and-breakfast/internal/models"
 )
 
-const templatePath = "./templates/"
+var templatePath = "./templates/"
 
 var app *config.AppConfig
 var functions = template.FuncMap{}
@@ -47,7 +47,7 @@ func Template(w http.ResponseWriter, r *http.Request, tmpl string, td *models.Te
 	// Pulls a template out of the template map(tc)
 	t, ok := tc[tmpl]
 	if !ok {
-		log.Fatal("Could not get template from template cache")
+		log.Println("Could not get template from template cache")
 		return errors.New("Can't get template from cache")
 	}
 
