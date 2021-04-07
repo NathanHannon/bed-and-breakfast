@@ -96,5 +96,8 @@ func TestForm_MinLength(t *testing.T) {
 	if isError != "" {
 		t.Error("should not have an error, but got one")
 	}
+}
+
+func TestForm_IsEmail(t *testing.T) {
 
 }

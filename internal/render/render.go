@@ -14,7 +14,7 @@ import (
 	"github.com/nathanhannon/bed-and-breakfast/internal/models"
 )
 
-var templatePath = "./templates/"
+var templatePath = "./templates"
 
 var app *config.AppConfig
 var functions = template.FuncMap{}
