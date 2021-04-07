@@ -52,3 +52,10 @@
 .datepicker {
     z-index: 10000;
 }
+
+/* Navbar */
+
+.navmenu {
+    position: fixed !important;
+    z-index: 100;
+}
