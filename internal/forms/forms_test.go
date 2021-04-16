@@ -45,7 +45,7 @@ func TestForm_Has(t *testing.T) {
 	r := httptest.NewRequest("POST", "/whatever", nil)
 	form := New(r.PostForm)
 
-	has := form.Has("whatever", r)
+	has := form.Has("whatever")
 	if has {
 		t.Error("form shows has field when it does not")
 	}
@@ -54,7 +54,7 @@ func TestForm_Has(t *testing.T) {
 	postedData.Add("a", "a")
 	form = New(postedData)
 
-	has = form.Has("a", r)
+	has = form.Has("a")
 	if !has {
 		t.Error("shows form does not have field when it should")
 	}
@@ -64,7 +64,7 @@ func TestForm_MinLength(t *testing.T) {
 	r := httptest.NewRequest("POST", "/whatever", nil)
 	form := New(r.PostForm)
 
-	form.MinLength("x", 10, r)
+	form.MinLength("x", 10)
 	if form.Valid() {
 		t.Error("form shows min length for non-existent field")
 	}
@@ -78,7 +78,7 @@ func TestForm_MinLength(t *testing.T) {
 	postedValues.Add("some_field", "some value")
 	form = New(postedValues)
 
-	form.MinLength("some_field", 100, r)
+	form.MinLength("some_field", 100)
 	if form.Valid() {
 		t.Error("shows minlength of 100 met when data is shorter")
 	}
@@ -87,7 +87,7 @@ func TestForm_MinLength(t *testing.T) {
 	postedValues.Add("another_field", "abc123")
 	form = New(postedValues)
 
-	form.MinLength("another_field", 1, r)
+	form.MinLength("another_field", 1)
 	if !form.Valid() {
 		t.Error("shows minlength of 1 is not met when it is")
 	}
@@ -96,8 +96,33 @@ func TestForm_MinLength(t *testing.T) {
 	if isError != "" {
 		t.Error("should not have an error, but got one")
 	}
+
 }
 
 func TestForm_IsEmail(t *testing.T) {
+	postedValues := url.Values{}
+	form := New(postedValues)
 
+	form.IsEmail("x")
+	if form.Valid() {
+		t.Error("form shows valid email for non-existent field")
+	}
+
+	postedValues = url.Values{}
+	postedValues.Add("email", "me@here.com")
+	form = New(postedValues)
+
+	form.IsEmail("email")
+	if !form.Valid() {
+		t.Error("got an invalid email when we should not have")
+	}
+
+	postedValues = url.Values{}
+	postedValues.Add("email", "x")
+	form = New(postedValues)
+
+	form.IsEmail("email")
+	if form.Valid() {
+		t.Error("got valid for invalid email address")
+	}
 }
