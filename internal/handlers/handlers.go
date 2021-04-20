@@ -3,11 +3,11 @@ package handlers
 import (
 	"encoding/json"
 	"fmt"
-	"log"
 	"net/http"
 
 	"github.com/nathanhannon/bed-and-breakfast/internal/config"
 	"github.com/nathanhannon/bed-and-breakfast/internal/forms"
+	"github.com/nathanhannon/bed-and-breakfast/internal/helpers"
 	"github.com/nathanhannon/bed-and-breakfast/internal/models"
 	"github.com/nathanhannon/bed-and-breakfast/internal/render"
 )
@@ -39,12 +39,7 @@ func (m *Repository) Home(w http.ResponseWriter, r *http.Request) {
 
 // About is the about page handler
 func (m *Repository) About(w http.ResponseWriter, r *http.Request) {
-	stringMap := make(map[string]string)
-	stringMap["test"] = "Hello again."
-	// sends data to the template
-	render.Template(w, r, "about.page.tmpl", &models.TemplateData{
-		StringMap: stringMap,
-	})
+	render.Template(w, r, "about.page.tmpl", &models.TemplateData{})
 }
 
 // Reservation renders the reservation page and the accompanying form
@@ -63,7 +58,7 @@ func (m *Repository) Reservation(w http.ResponseWriter, r *http.Request) {
 func (m *Repository) PostReservation(w http.ResponseWriter, r *http.Request) {
 	err := r.ParseForm()
 	if err != nil {
-		log.Println(err)
+		helpers.ServerError(w, err)
 		return
 	}
 	reservation := models.Reservation{
@@ -98,7 +93,7 @@ func (m *Repository) PostReservation(w http.ResponseWriter, r *http.Request) {
 func (m *Repository) ReservationSummary(w http.ResponseWriter, r *http.Request) {
 	reservation, ok := m.App.Session.Get(r.Context(), "reservation").(models.Reservation)
 	if !ok {
-		log.Println("Cannot get item from session")
+		m.App.ErrorLog.Println("Can't get error from session")
 		m.App.Session.Put(r.Context(), "error", "Can't get reservation from session")
 		http.Redirect(w, r, "/", http.StatusTemporaryRedirect)
 		return
@@ -139,9 +134,10 @@ func (m *Repository) AvailabilityJSON(w http.ResponseWriter, r *http.Request) {
 	}
 	out, err := json.MarshalIndent(resp, "", "    ")
 	if err != nil {
-		log.Panicln(err)
+		helpers.ServerError(w, err)
+		return
 	}
-	log.Println(string(out))
+
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(out)
 }
