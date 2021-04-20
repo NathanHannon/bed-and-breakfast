@@ -19,8 +19,7 @@ const portNumber = ":8081"
 
 var app config.AppConfig
 var session *scs.SessionManager
-var infoLog *log.Logger
-var errorLog *log.Logger
+var infoLog, errorLog *log.Logger
 
 // main is the main function
 func main() {
