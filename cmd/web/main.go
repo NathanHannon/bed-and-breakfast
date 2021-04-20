@@ -11,6 +11,7 @@ import (
 	"github.com/alexedwards/scs/v2"
 	"github.com/nathanhannon/bed-and-breakfast/internal/config"
 	"github.com/nathanhannon/bed-and-breakfast/internal/handlers"
+	"github.com/nathanhannon/bed-and-breakfast/internal/helpers"
 	"github.com/nathanhannon/bed-and-breakfast/internal/models"
 	"github.com/nathanhannon/bed-and-breakfast/internal/render"
 )
@@ -68,6 +69,7 @@ func run() error {
 	repo := handlers.NewRepo(&app)
 	handlers.NewHandlers(repo)
 	render.NewTemplates(&app)
+	helpers.NewHelpers(&app)
 
 	return nil
 }
