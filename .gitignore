@@ -1,4 +1,5 @@
 *.txt
 *.exe
+*.yml
 /working/
 /static/html/
