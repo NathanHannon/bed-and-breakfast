@@ -1,7 +1,5 @@
 *.txt
 *.exe
 *.yml
-*.sh
-*.bat
 /working/
 /static/html/
