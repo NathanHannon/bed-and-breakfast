@@ -15,6 +15,7 @@ import (
 	"github.com/go-chi/chi/middleware"
 	"github.com/justinas/nosurf"
 	"github.com/nathanhannon/bed-and-breakfast/internal/config"
+	"github.com/nathanhannon/bed-and-breakfast/internal/driver"
 	"github.com/nathanhannon/bed-and-breakfast/internal/models"
 	"github.com/nathanhannon/bed-and-breakfast/internal/render"
 )
@@ -51,7 +52,7 @@ func getRoutes() http.Handler {
 	app.TemplateCache = tc
 	app.UseCache = true
 
-	repo := NewRepo(&app)
+	repo := NewRepo(&app, &driver.DB{})
 	NewHandlers(repo)
 	render.NewTemplates(&app)
 

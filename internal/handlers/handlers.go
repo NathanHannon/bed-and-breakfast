@@ -6,10 +6,13 @@ import (
 	"net/http"
 
 	"github.com/nathanhannon/bed-and-breakfast/internal/config"
+	"github.com/nathanhannon/bed-and-breakfast/internal/driver"
 	"github.com/nathanhannon/bed-and-breakfast/internal/forms"
 	"github.com/nathanhannon/bed-and-breakfast/internal/helpers"
 	"github.com/nathanhannon/bed-and-breakfast/internal/models"
 	"github.com/nathanhannon/bed-and-breakfast/internal/render"
+	"github.com/nathanhannon/bed-and-breakfast/internal/repository"
+	"github.com/nathanhannon/bed-and-breakfast/internal/repository/dbrepo"
 )
 
 // Repo is the repository used by the handlers
@@ -18,12 +21,14 @@ var Repo *Repository
 // Repository is the repository type
 type Repository struct {
 	App *config.AppConfig
+	DB  repository.DatabaseRepo
 }
 
 // NewRepo creates a new repository
-func NewRepo(a *config.AppConfig) *Repository {
+func NewRepo(a *config.AppConfig, db *driver.DB) *Repository {
 	return &Repository{
 		App: a,
+		DB:  dbrepo.NewPostgresRepo(db.SQL, a),
 	}
 }
 
