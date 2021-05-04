@@ -59,3 +59,9 @@
     position: fixed !important;
     z-index: 100;
 }
+
+/* Overflow Fix */
+
+body {
+    overflow: hidden !important;
+}
