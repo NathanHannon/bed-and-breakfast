@@ -27,6 +27,7 @@
     padding: 1em;
     color: white;
     font-size: 80%;
+    min-width: 100% !important;
 }
 
 /* Room pictures from Unsplash */
@@ -62,6 +63,6 @@
 
 /* Overflow Fix */
 
-body {
+.make-reservation {
     overflow: hidden !important;
 }
