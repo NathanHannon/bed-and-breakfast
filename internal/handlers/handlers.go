@@ -2,7 +2,6 @@ package handlers
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 	"strconv"
 	"time"
@@ -189,14 +188,17 @@ func (m *Repository) PostAvailability(w http.ResponseWriter, r *http.Request) {
 		helpers.ServerError(w, err)
 		return
 	}
-	for _, i := range rooms {
-		m.App.InfoLog.Println("ROOM:", i.ID, i.RoomName)
-	}
 	if len(rooms) == 0 {
 		m.App.Session.Put(r.Context(), "error", "No availability")
+		http.Redirect(w, r, "/search-availability", http.StatusSeeOther)
+		return
 	}
+	data := make(map[string]interface{})
+	data["rooms"] = rooms
 
-	w.Write([]byte(fmt.Sprintf("Start date is %s and end date is %s", start, end)))
+	render.Template(w, r, "choose-room.page.tmpl", &models.TemplateData{
+		Data: data,
+	})
 }
 
 type jsonResponse struct {
