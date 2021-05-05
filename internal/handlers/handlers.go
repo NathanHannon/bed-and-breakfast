@@ -193,9 +193,7 @@ func (m *Repository) PostAvailability(w http.ResponseWriter, r *http.Request) {
 		m.App.InfoLog.Println("ROOM:", i.ID, i.RoomName)
 	}
 	if len(rooms) == 0 {
-
-	} else {
-
+		m.App.Session.Put(r.Context(), "error", "No availability")
 	}
 
 	w.Write([]byte(fmt.Sprintf("Start date is %s and end date is %s", start, end)))
