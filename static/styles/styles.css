@@ -60,9 +60,3 @@
     position: fixed !important;
     z-index: 100;
 }
-
-/* Overflow Fix */
-
-.make-reservation {
-    overflow: hidden !important;
-}
