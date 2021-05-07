@@ -38,7 +38,8 @@
     // Custom date picker with the vanillajs-datepicker library 
     const elem = document.getElementById('reservationDates');
     const rangepicker = new DateRangePicker(elem, {
-        format: "yyyy-mm-dd"
+        format: "yyyy-mm-dd",
+        minDate: new Date(),
     });
 </script>
 

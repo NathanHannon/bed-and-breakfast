@@ -5,13 +5,13 @@
 <div class="container">
     <div class="row">
         <div class="col">
+            {{$res := index .Data "reservation"}}
             <h1 style="margin-top: 50px;">Make Reservation</h1>
             <strong>Reservation Details</strong>
-            <p>Arrival: {{index .StringMap "start_date"}} <br>
-                Departure: {{index .StringMap "end_date"}}
-            </p>
+            <p>Room: {{$res.Room.RoomName}}<br>
+            Arrival: {{index .StringMap "start_date"}}<br>
+            Departure: {{index .StringMap "end_date"}}</p>
 
-            {{$res := index .Data "reservation"}}
             <form method="POST" action="/make-reservation" class="make-reservation" novalidate>
                 <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
                 <input type="hidden" name="start_date" value="{{index .StringMap "start_date"}}">
