@@ -58,7 +58,7 @@
     </div>
 </form>
 `
-attention.custom({
+        attention.custom({
             message: html,
             title: "Choose your dates",
 
@@ -67,6 +67,7 @@ attention.custom({
                 const rp = new DateRangePicker(elem, {
                     format: 'yyyy-mm-dd',
                     showOnFocus: true,
+                    minDate: new Date(),
                 })
             },
 
