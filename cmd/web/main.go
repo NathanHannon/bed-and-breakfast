@@ -30,15 +30,18 @@ func main() {
 		log.Fatal(err)
 	}
 	defer db.SQL.Close()
+	defer close(app.MailChannel)
+	listenForMail()
 
-	// Standard library mail demo
-	// from := "me@here.com"
-	// auth := smtp.PlainAuth("", from, "", "localhost")
-	// err = smtp.SendMail("localhost:1025", auth, from, []string{"you@there.com"}, []byte("hello, world!"))
-	// if err != nil {
-	// 	log.Println(err)
+	// message := models.MailData{
+	// 	To:      "john@do.ca",
+	// 	From:    "me@here.com",
+	// 	Subject: "Some subject",
+	// 	Content: "",
 	// }
+	// app.MailChannel <- message
 
+	fmt.Println("Starting mail listener...")
 	fmt.Printf("Starting port number on port %s\n", portNumber)
 
 	srv := &http.Server{
@@ -55,6 +58,10 @@ func run() (*driver.DB, error) {
 	gob.Register(models.User{})
 	gob.Register(models.Room{})
 	gob.Register(models.Restriction{})
+
+	// Channel for sending and receiving mail
+	mailChannel := make(chan models.MailData)
+	app.MailChannel = mailChannel
 
 	// Change this to true when in production
 	app.InProduction = false
