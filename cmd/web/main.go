@@ -25,12 +25,19 @@ var infoLog, errorLog *log.Logger
 
 // main is the main function
 func main() {
-
 	db, err := run()
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer db.SQL.Close()
+
+	// Standard library mail demo
+	// from := "me@here.com"
+	// auth := smtp.PlainAuth("", from, "", "localhost")
+	// err = smtp.SendMail("localhost:1025", auth, from, []string{"you@there.com"}, []byte("hello, world!"))
+	// if err != nil {
+	// 	log.Println(err)
+	// }
 
 	fmt.Printf("Starting port number on port %s\n", portNumber)
 
