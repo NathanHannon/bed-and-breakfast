@@ -33,14 +33,6 @@ func main() {
 	defer close(app.MailChannel)
 	listenForMail()
 
-	// message := models.MailData{
-	// 	To:      "john@do.ca",
-	// 	From:    "me@here.com",
-	// 	Subject: "Some subject",
-	// 	Content: "",
-	// }
-	// app.MailChannel <- message
-
 	fmt.Println("Starting mail listener...")
 	fmt.Printf("Starting port number on port %s\n", portNumber)
 
