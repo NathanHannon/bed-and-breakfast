@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/justinas/nosurf"
+	"github.com/nathanhannon/bed-and-breakfast/internal/helpers"
 )
 
 // NoSurf adds Cross-Site Request Forgery protection on every POST request
@@ -22,4 +23,16 @@ func NoSurf(next http.Handler) http.Handler {
 // SessionLoad loads and saves the session data on every request
 func SessionLoad(next http.Handler) http.Handler {
 	return session.LoadAndSave(next)
+}
+
+// Auth ensures that only logged in users have access to certain routes
+func Auth(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if !helpers.IsAuthenticated(r) {
+			session.Put(r.Context(), "error", "Log in first!")
+			http.Redirect(w, r, "/login", http.StatusSeeOther)
+			return
+		}
+		next.ServeHTTP(w, r)
+	})
 }
