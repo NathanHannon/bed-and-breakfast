@@ -19,10 +19,10 @@ func (m *postgresDBRepo) InsertReservation(res models.Reservation) (int, error) 
 	defer cancel()
 
 	var newID int
-	stmt := `INSERT INTO reservations (first_name, last_name, email, phone, start_date, end_date, room_id, created_at, updated_at)
+	query := `INSERT INTO reservations (first_name, last_name, email, phone, start_date, end_date, room_id, created_at, updated_at)
 	VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING id`
 
-	err := m.DB.QueryRowContext(ctx, stmt,
+	err := m.DB.QueryRowContext(ctx, query,
 		res.FirstName,
 		res.LastName,
 		res.Email,
@@ -40,18 +40,18 @@ func (m *postgresDBRepo) InsertReservation(res models.Reservation) (int, error) 
 }
 
 // InsertRoomRestriction inserts a room restriction into the database
-func (m *postgresDBRepo) InsertRoomRestriction(r models.RoomRestriction) error {
+func (m *postgresDBRepo) InsertRoomRestriction(rest models.RoomRestriction) error {
 	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 	defer cancel()
 
-	stmt := `INSERT INTO room_restrictions (start_date, end_date, room_id, reservation_id, restriction_id, created_at, updated_at)
+	query := `INSERT INTO room_restrictions (start_date, end_date, room_id, reservation_id, restriction_id, created_at, updated_at)
 	VALUES ($1, $2, $3, $4, $5, $6, $7)`
-	_, err := m.DB.ExecContext(ctx, stmt,
-		r.StartDate,
-		r.EndDate,
-		r.RoomID,
-		r.ReservationID,
-		r.RestrictionID,
+	_, err := m.DB.ExecContext(ctx, query,
+		rest.StartDate,
+		rest.EndDate,
+		rest.RoomID,
+		rest.ReservationID,
+		rest.RestrictionID,
 		time.Now(),
 		time.Now(),
 	)
@@ -158,16 +158,16 @@ func (m *postgresDBRepo) GetUserByID(id int) (models.User, error) {
 }
 
 // UpdateUser updates user in the database
-func (m *postgresDBRepo) UpdateUser(users models.User) error {
+func (m *postgresDBRepo) UpdateUser(user models.User) error {
 	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 	defer cancel()
 
 	query := `UPDATE users SET first_name = $1, last_name = $2, email = $3, access_level = $4, updated_at = $5`
 	_, err := m.DB.ExecContext(ctx, query,
-		users.FirstName,
-		users.LastName,
-		users.Email,
-		users.AccessLevel,
+		user.FirstName,
+		user.LastName,
+		user.Email,
+		user.AccessLevel,
 		time.Now(),
 	)
 	if err != nil {
@@ -328,4 +328,38 @@ func (m *postgresDBRepo) GetReservationByID(id int) (models.Reservation, error) 
 	}
 
 	return res, nil
+}
+
+// UpdateReservation updates a reservation in the database
+func (m *postgresDBRepo) UpdateReservation(res models.Reservation) error {
+	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
+	defer cancel()
+
+	query := `UPDATE reservations SET first_name = $1, last_name = $2, email = $3, phone = $4, updated_at = $5`
+	_, err := m.DB.ExecContext(ctx, query,
+		res.FirstName,
+		res.LastName,
+		res.Email,
+		res.Phone,
+		time.Now(),
+	)
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+// DeleteReservation deletes one reservation by id
+func (m *postgresDBRepo) DeleteReservation(id int) error {
+	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
+	defer cancel()
+
+	query := `DELETE FROM reservations WHERE id = $1`
+
+	_, err := m.DB.ExecContext(ctx, query, id)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
