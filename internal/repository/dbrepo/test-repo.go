@@ -154,3 +154,8 @@ func (m *testDBRepo) UpdateReservation(res models.Reservation) error {
 func (m *testDBRepo) DeleteReservation(id int) error {
 	return nil
 }
+
+// UpdateProcessedReservation updates whether a reservation was processed
+func (m *testDBRepo) UpdateProcessedReservation(id, processed int) error {
+	return nil
+}
