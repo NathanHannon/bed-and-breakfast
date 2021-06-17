@@ -1,13 +1,12 @@
-
-// JavaScript module for alerts and toasts
+// Prompt is our JavaScript module for all alerts, notifications, and custom popup dialogs
 function Prompt() {
-    // Toasts
     let toast = function (c) {
         const {
             message = "",
             icon = "success",
             position = "top-end",
         } = c;
+
         const Toast = Swal.mixin({
             toast: true,
             title: message,
@@ -22,39 +21,39 @@ function Prompt() {
             }
         })
 
-        Toast.fire({
-
-        })
+        Toast.fire({})
     }
+
     let success = function (c) {
         const {
             message = "",
             title = "",
-            footer = ""
-        } = c
+            footer = "",
+        } = c;
 
         Swal.fire({
             icon: 'success',
             title: title,
             text: message,
-            footer: footer
+            footer: footer,
         })
     }
+
     let error = function (c) {
         const {
             message = "",
             title = "",
-            footer = ""
-        } = c
+            footer = "",
+        } = c;
 
         Swal.fire({
             icon: 'error',
             title: title,
             text: message,
-            footer: footer
+            footer: footer,
         })
     }
-    // Custom alert modal
+
     async function custom(c) {
         const {
             icon = "",
@@ -76,20 +75,13 @@ function Prompt() {
                     c.willOpen();
                 }
             },
-
             didOpen: () => {
                 if (c.didOpen !== undefined) {
                     c.didOpen();
                 }
-            },
-
-            preConfirm: () => {
-                return [
-                    document.getElementById('start').value,
-                    document.getElementById('end').value
-                ]
             }
         })
+
         if (result) {
             if (result.dismiss !== Swal.DismissReason.cancel) {
                 if (result.value !== "") {
@@ -106,6 +98,8 @@ function Prompt() {
             }
         }
     }
+
+
     return {
         toast: toast,
         success: success,

@@ -26,6 +26,9 @@
             label {
                 font-weight: bold;
             }
+            .notie-container {
+                z-index: 50000;
+            }
         </style>
         {{block "css" . }}
 
@@ -143,8 +146,31 @@
         <script src="/static/admin/js/todolist.js"></script>
         <!-- endinject -->
         <!-- Custom js for this page-->
+        <script src="https://unpkg.com/notie"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+        <script src="/static/scripts/app.js"></script>
         <script src="/static/admin/js/dashboard.js"></script>
         <!-- End custom js for this page-->
+        <script>
+            let attention = Prompt();
+            // Notification banners with the notie library
+            function notify(message, messageType) {
+                notie.alert({
+                    type: messageType,
+                    text: message
+                })
+            }
+
+            // Modal function with the sweetalert2 library
+            function notifyModal(title, text, icon, confirmationButtonText) {
+                Swal.fire({
+                    title: title,
+                    html: text,
+                    icon: icon,
+                    confirmButtonText: confirmationButtonText
+                })
+            }
+        </script>
 
         {{block "js" . }}
 
