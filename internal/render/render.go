@@ -19,7 +19,8 @@ var templatePath = "./templates"
 
 var app *config.AppConfig
 var functions = template.FuncMap{
-	"humanDate": HumanDate,
+	"humanDate":  HumanDate,
+	"formatDate": FormatDate,
 }
 
 // NewRenderer sets the config for the template package
@@ -30,6 +31,10 @@ func NewRenderer(a *config.AppConfig) {
 // HumanDate returns time in YYYY-MM-DD format
 func HumanDate(t time.Time) string {
 	return t.Format("2006-01-02")
+}
+
+func FormatDate(t time.Time, f string) string {
+	return t.Format(f)
 }
 
 // DefaultData handles data which will be on all pages
@@ -107,4 +112,16 @@ func CreateTemplateCache() (map[string]*template.Template, error) {
 		myCache[name] = ts
 	}
 	return myCache, nil
+}
+
+// Iterate returns a slice of ints, starting at 1, counting up
+func Iterate(count int) []int {
+	var i int
+	var items []int
+
+	for i = 0; i < count; i++ {
+		items = append(items, i)
+	}
+
+	return items
 }
