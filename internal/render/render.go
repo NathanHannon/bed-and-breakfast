@@ -16,11 +16,12 @@ import (
 )
 
 var templatePath = "./templates"
-
 var app *config.AppConfig
 var functions = template.FuncMap{
 	"humanDate":  HumanDate,
 	"formatDate": FormatDate,
+	"iterate":    Iterate,
+	"add":        Add,
 }
 
 // NewRenderer sets the config for the template package
@@ -114,14 +115,16 @@ func CreateTemplateCache() (map[string]*template.Template, error) {
 	return myCache, nil
 }
 
-// Iterate returns a slice of ints, starting at 1, counting up
+// Iterate returns a slice of ints, starting at 1, going to count
 func Iterate(count int) []int {
 	var i int
 	var items []int
-
 	for i = 0; i < count; i++ {
 		items = append(items, i)
 	}
-
 	return items
+}
+
+func Add(a, b int) int {
+	return a + b
 }

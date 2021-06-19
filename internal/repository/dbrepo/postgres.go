@@ -386,7 +386,8 @@ func (m *postgresDBRepo) AllRooms() ([]models.Room, error) {
 
 	var rooms []models.Room
 
-	query := `SELECT id, room_name, created_at, updated_at FROM rooms ORDER BY room_name`
+	query := `select id, room_name, created_at, updated_at from rooms order by room_name`
+
 	rows, err := m.DB.QueryContext(ctx, query)
 	if err != nil {
 		return rooms, err
@@ -405,9 +406,11 @@ func (m *postgresDBRepo) AllRooms() ([]models.Room, error) {
 			return rooms, err
 		}
 		rooms = append(rooms, rm)
-		if err = rows.Err(); err != nil {
-			return rooms, err
-		}
 	}
+
+	if err = rows.Err(); err != nil {
+		return rooms, err
+	}
+
 	return rooms, nil
 }
