@@ -3,13 +3,6 @@ package handlers
 import (
 	"encoding/gob"
 	"fmt"
-	"github.com/alexedwards/scs/v2"
-	"github.com/go-chi/chi"
-	"github.com/go-chi/chi/middleware"
-	"github.com/justinas/nosurf"
-	"github.com/tsawler/bookings/internal/config"
-	"github.com/tsawler/bookings/internal/models"
-	"github.com/tsawler/bookings/internal/render"
 	"html/template"
 	"log"
 	"net/http"
@@ -17,6 +10,14 @@ import (
 	"path/filepath"
 	"testing"
 	"time"
+
+	"github.com/alexedwards/scs/v2"
+	"github.com/go-chi/chi"
+	"github.com/go-chi/chi/middleware"
+	"github.com/justinas/nosurf"
+	"github.com/nathanhannon/bed-and-breakfast/internal/config"
+	"github.com/nathanhannon/bed-and-breakfast/internal/models"
+	"github.com/nathanhannon/bed-and-breakfast/internal/render"
 )
 
 var app config.AppConfig
@@ -54,9 +55,9 @@ func TestMain(m *testing.M) {
 
 	app.Session = session
 
-	mailChan := make(chan models.MailData)
-	app.MailChan = mailChan
-	defer close(mailChan)
+	MailChannel := make(chan models.MailData)
+	app.MailChannel = MailChannel
+	defer close(MailChannel)
 
 	listenForMail()
 
@@ -78,7 +79,7 @@ func TestMain(m *testing.M) {
 func listenForMail() {
 	go func() {
 		for {
-			_ = <-app.MailChan
+			_ = <-app.MailChannel
 		}
 	}()
 }

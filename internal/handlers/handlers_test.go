@@ -4,8 +4,6 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"github.com/tsawler/bookings/internal/driver"
-	"github.com/tsawler/bookings/internal/models"
 	"log"
 	"net/http"
 	"net/http/httptest"
@@ -14,6 +12,9 @@ import (
 	"strings"
 	"testing"
 	"time"
+
+	"github.com/nathanhannon/bed-and-breakfast/internal/driver"
+	"github.com/nathanhannon/bed-and-breakfast/internal/models"
 )
 
 type postData struct {

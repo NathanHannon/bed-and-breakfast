@@ -50,6 +50,7 @@ func run() (*driver.DB, error) {
 	gob.Register(models.User{})
 	gob.Register(models.Room{})
 	gob.Register(models.Restriction{})
+	gob.Register(map[string]int{})
 
 	// Channel for sending and receiving mail
 	mailChannel := make(chan models.MailData)
