@@ -555,6 +555,11 @@ func (m *Repository) AdminReservationsCalendar(w http.ResponseWriter, r *http.Re
 	})
 }
 
+// AdminReservationsCalendar handles the post reservation calendar
+func (*Repository) AdminPostReservationsCalendar(w http.ResponseWriter, r *http.Request) {
+
+}
+
 // AdminShowReservation shows the reservation in the admin tool
 func (m *Repository) AdminShowReservation(w http.ResponseWriter, r *http.Request) {
 	explodedURL := strings.Split(r.RequestURI, "/")
