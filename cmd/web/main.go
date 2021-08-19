@@ -17,7 +17,7 @@ import (
 	"github.com/nathanhannon/bed-and-breakfast/internal/render"
 )
 
-const portNumber = ":8081"
+const portNumber = ":1023"
 
 var app config.AppConfig
 var session *scs.SessionManager
