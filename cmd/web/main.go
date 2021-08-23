@@ -65,6 +65,11 @@ func run() (*driver.DB, error) {
 
 	flag.Parse()
 
+	if *dbName == "" || *dbUser == "" {
+		fmt.Println("missing required flags")
+		os.Exit(1)
+	}
+
 	// Channel for sending and receiving mail
 	mailChannel := make(chan models.MailData)
 	app.MailChannel = mailChannel
