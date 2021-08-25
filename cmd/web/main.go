@@ -70,7 +70,7 @@ func run() (*driver.DB, error) {
 		os.Exit(1)
 	}
 
-	if *inProduction == true {
+	if *inProduction {
 		portNumber = ":8080"
 	}
 
