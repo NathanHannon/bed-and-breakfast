@@ -18,7 +18,7 @@ import (
 	"github.com/nathanhannon/bed-and-breakfast/internal/render"
 )
 
-const portNumber = ":1023"
+var portNumber = ":1023"
 
 var app config.AppConfig
 var session *scs.SessionManager
@@ -68,6 +68,10 @@ func run() (*driver.DB, error) {
 	if *dbName == "" || *dbUser == "" {
 		fmt.Println("missing required flags")
 		os.Exit(1)
+	}
+
+	if *inProduction == true {
+		portNumber = ":8080"
 	}
 
 	// Channel for sending and receiving mail
