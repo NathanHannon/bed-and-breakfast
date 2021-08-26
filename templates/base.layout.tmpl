@@ -22,7 +22,7 @@
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">Navbar</a>
+                <a class="navbar-brand" href="#">&nbsp;</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -59,9 +59,13 @@
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         Admin
                                     </a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="/admin/dashboard">Dashboard</a>
-                                        <a class="dropdown-item" href="/user/logout">Logout</a>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li>
+                                            <a class="dropdown-item" href="/admin/dashboard">Dashboard</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="/user/logout">Logout</a>
+                                        </li>
                                     </div>
                                 </li>
                             {{else}}
@@ -78,14 +82,19 @@
         {{end}}
 
         <div class="row my-footer">
-            <div class="col">
-                Left
+            <div class="col text-center">
+                <strong>Fort Oak Bed &amp; Breakfast</strong><br>
+                100 Rocky Road<br>
+                Northbrook, Ontario<br>
+                Canada<br>
+                (519) 515-1234<br>
+                <a href="mailto:info@fobb.ca">info@fobb.ca</a>
             </div>
             <div class="col">
-                Middle
+
             </div>
-            <div class="col">
-                Right
+            <div class="col text-center">
+                <strong>Your home away from home. This will be a vacation to remember</strong>
             </div>
         </div>
         <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
