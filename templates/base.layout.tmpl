@@ -24,8 +24,8 @@
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">&nbsp;</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -38,7 +38,7 @@
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
+                               data-bs-toggle="dropdown" aria-expanded="false">
                                 Rooms
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -54,23 +54,20 @@
                         </li>
                         <li class="nav-item">
                             {{if eq .IsAuthenticated 1}}
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Admin
-                                    </a>
-                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <li>
-                                            <a class="dropdown-item" href="/admin/dashboard">Dashboard</a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item" href="/user/logout">Logout</a>
-                                        </li>
-                                    </div>
-                                </li>
-                            {{else}}
-                                <a class="nav-link" href="/user/login" tabindex="-1" aria-disabled="true">Login</a>
-                            {{end}}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                               data-bs-toggle="dropdown"
+                               aria-expanded="false">
+                                Admin
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="/admin/dashboard">Dashboard</a></li>
+                                <li><a class="dropdown-item" href="/user/logout">Logout</a></li>
+                            </ul>
+                        </li>
+                        {{else}}
+                            <a class="nav-link" href="/user/login" tabindex="-1" aria-disabled="true">Login</a>
+                        {{end}}
                         </li>
                     </ul>
                 </div>
