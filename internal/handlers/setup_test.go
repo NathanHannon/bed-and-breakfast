@@ -15,9 +15,9 @@ import (
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
 	"github.com/justinas/nosurf"
-	"github.com/nathanhannon/bed-and-breakfast/internal/config"
-	"github.com/nathanhannon/bed-and-breakfast/internal/models"
-	"github.com/nathanhannon/bed-and-breakfast/internal/render"
+	"nathanhannon.dev/bed-and-breakfast/internal/config"
+	"nathanhannon.dev/bed-and-breakfast/internal/models"
+	"nathanhannon.dev/bed-and-breakfast/internal/render"
 )
 
 var app config.AppConfig
