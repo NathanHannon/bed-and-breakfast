@@ -3,7 +3,7 @@ package repository
 import (
 	"time"
 
-	"github.com/nathanhannon/bed-and-breakfast/internal/models"
+	"nathanhannon.dev/bed-and-breakfast/internal/models"
 )
 
 type DatabaseRepo interface {

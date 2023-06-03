@@ -5,7 +5,7 @@ import (
 	"log"
 	"time"
 
-	"github.com/nathanhannon/bed-and-breakfast/internal/models"
+	"nathanhannon.dev/bed-and-breakfast/internal/models"
 )
 
 func (m *testDBRepo) AllUsers() bool {

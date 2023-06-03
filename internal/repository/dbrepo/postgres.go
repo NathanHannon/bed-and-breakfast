@@ -6,8 +6,8 @@ import (
 	"log"
 	"time"
 
-	"github.com/nathanhannon/bed-and-breakfast/internal/models"
 	"golang.org/x/crypto/bcrypt"
+	"nathanhannon.dev/bed-and-breakfast/internal/models"
 )
 
 func (m *postgresDBRepo) AllUsers() bool {

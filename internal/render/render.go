@@ -11,8 +11,8 @@ import (
 	"time"
 
 	"github.com/justinas/nosurf"
-	"github.com/nathanhannon/bed-and-breakfast/internal/config"
-	"github.com/nathanhannon/bed-and-breakfast/internal/models"
+	"nathanhannon.dev/bed-and-breakfast/internal/config"
+	"nathanhannon.dev/bed-and-breakfast/internal/models"
 )
 
 var templatePath = "./templates"

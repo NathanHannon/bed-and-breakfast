@@ -6,8 +6,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/nathanhannon/bed-and-breakfast/internal/models"
 	mail "github.com/xhit/go-simple-mail/v2"
+	"nathanhannon.dev/bed-and-breakfast/internal/models"
 )
 
 func listenForMail() {

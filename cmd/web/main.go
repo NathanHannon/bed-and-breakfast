@@ -10,12 +10,12 @@ import (
 	"time"
 
 	"github.com/alexedwards/scs/v2"
-	"github.com/nathanhannon/bed-and-breakfast/internal/config"
-	"github.com/nathanhannon/bed-and-breakfast/internal/driver"
-	"github.com/nathanhannon/bed-and-breakfast/internal/handlers"
-	"github.com/nathanhannon/bed-and-breakfast/internal/helpers"
-	"github.com/nathanhannon/bed-and-breakfast/internal/models"
-	"github.com/nathanhannon/bed-and-breakfast/internal/render"
+	"nathanhannon.dev/bed-and-breakfast/internal/config"
+	"nathanhannon.dev/bed-and-breakfast/internal/driver"
+	"nathanhannon.dev/bed-and-breakfast/internal/handlers"
+	"nathanhannon.dev/bed-and-breakfast/internal/helpers"
+	"nathanhannon.dev/bed-and-breakfast/internal/models"
+	"nathanhannon.dev/bed-and-breakfast/internal/render"
 )
 
 var portNumber = ":1023"

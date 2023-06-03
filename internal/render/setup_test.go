@@ -9,8 +9,8 @@ import (
 	"time"
 
 	"github.com/alexedwards/scs/v2"
-	"github.com/nathanhannon/bed-and-breakfast/internal/config"
-	"github.com/nathanhannon/bed-and-breakfast/internal/models"
+	"nathanhannon.dev/bed-and-breakfast/internal/config"
+	"nathanhannon.dev/bed-and-breakfast/internal/models"
 )
 
 var session *scs.SessionManager
