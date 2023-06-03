@@ -3,8 +3,8 @@ package dbrepo
 import (
 	"database/sql"
 
-	"nathanhannon.dev/bed-and-breakfast/internal/config"
-	"nathanhannon.dev/bed-and-breakfast/internal/repository"
+	"github.com/nathanhannon/bed-and-breakfast/internal/config"
+	"github.com/nathanhannon/bed-and-breakfast/internal/repository"
 )
 
 type postgresDBRepo struct {

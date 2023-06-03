@@ -11,14 +11,14 @@ import (
 	"time"
 
 	"github.com/go-chi/chi"
-	"nathanhannon.dev/bed-and-breakfast/internal/config"
-	"nathanhannon.dev/bed-and-breakfast/internal/driver"
-	"nathanhannon.dev/bed-and-breakfast/internal/forms"
-	"nathanhannon.dev/bed-and-breakfast/internal/helpers"
-	"nathanhannon.dev/bed-and-breakfast/internal/models"
-	"nathanhannon.dev/bed-and-breakfast/internal/render"
-	"nathanhannon.dev/bed-and-breakfast/internal/repository"
-	"nathanhannon.dev/bed-and-breakfast/internal/repository/dbrepo"
+	"github.com/nathanhannon/bed-and-breakfast/internal/config"
+	"github.com/nathanhannon/bed-and-breakfast/internal/driver"
+	"github.com/nathanhannon/bed-and-breakfast/internal/forms"
+	"github.com/nathanhannon/bed-and-breakfast/internal/helpers"
+	"github.com/nathanhannon/bed-and-breakfast/internal/models"
+	"github.com/nathanhannon/bed-and-breakfast/internal/render"
+	"github.com/nathanhannon/bed-and-breakfast/internal/repository"
+	"github.com/nathanhannon/bed-and-breakfast/internal/repository/dbrepo"
 )
 
 // Repo is the repository used by the handlers

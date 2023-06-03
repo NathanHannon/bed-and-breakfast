@@ -1,6 +1,6 @@
 package models
 
-import "nathanhannon.dev/bed-and-breakfast/internal/forms"
+import "github.com/nathanhannon/bed-and-breakfast/internal/forms"
 
 // TemplateData holds data sent from handlers to templates
 type TemplateData struct {

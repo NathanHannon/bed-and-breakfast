@@ -13,8 +13,8 @@ import (
 	"testing"
 	"time"
 
-	"nathanhannon.dev/bed-and-breakfast/internal/driver"
-	"nathanhannon.dev/bed-and-breakfast/internal/models"
+	"github.com/nathanhannon/bed-and-breakfast/internal/driver"
+	"github.com/nathanhannon/bed-and-breakfast/internal/models"
 )
 
 type postData struct {

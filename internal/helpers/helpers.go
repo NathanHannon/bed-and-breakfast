@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"runtime/debug"
 
-	"nathanhannon.dev/bed-and-breakfast/internal/config"
+	"github.com/nathanhannon/bed-and-breakfast/internal/config"
 )
 
 var app *config.AppConfig

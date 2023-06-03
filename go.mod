@@ -1,4 +1,4 @@
-module nathanhannon.dev/bed-and-breakfast
+module github.com/nathanhannon/bed-and-breakfast
 
 go 1.20
 
@@ -9,9 +9,13 @@ require (
 	github.com/jackc/pgconn v1.8.1
 	github.com/jackc/pgx/v4 v4.11.0
 	github.com/justinas/nosurf v1.1.1
-	nathanhannon.dev/bed-and-breakfast v0.0.0-20230313214822-85ace412f32c
-	github.com/xhit/go-simple-mail/v2 v2.9.0
+	github.com/xhit/go-simple-mail/v2 v2.13.0
 	golang.org/x/crypto v0.0.0-20210322153248-0c34fe9e7dc2
+)
+
+require (
+	github.com/go-test/deep v1.1.0 // indirect
+	github.com/toorop/go-dkim v0.0.0-20201103131630-e1cd1a0a5208 // indirect
 )
 
 require (

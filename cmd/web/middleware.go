@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/justinas/nosurf"
-	"nathanhannon.dev/bed-and-breakfast/internal/helpers"
+	"github.com/nathanhannon/bed-and-breakfast/internal/helpers"
 )
 
 // NoSurf adds Cross-Site Request Forgery protection on every POST request
