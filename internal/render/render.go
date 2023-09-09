@@ -24,22 +24,29 @@ var functions = template.FuncMap{
 	"add":        Add,
 }
 
-// NewRenderer sets the config for the template package
+// NewRenderer creates a new renderer with the given AppConfig.
 func NewRenderer(a *config.AppConfig) {
 	app = a
 }
 
-// HumanDate returns time in YYYY-MM-DD format
+// HumanDate takes a time.Time object and returns a string representation of the date in the format "2006-01-02".
 func HumanDate(t time.Time) string {
 	return t.Format("2006-01-02")
 }
 
+// FormatDate formats a given time.Time object to a string using the provided format string.
+// The format string should be in the same format as the standard library's time package.
 func FormatDate(t time.Time, f string) string {
 	return t.Format(f)
 }
 
-// DefaultData handles data which will be on all pages
+// DefaultData populates the default data for templates.
+// It takes a pointer to a TemplateData struct and a pointer to an http.Request struct.
+// It returns a pointer to a TemplateData struct.
 func DefaultData(td *models.TemplateData, r *http.Request) *models.TemplateData {
+	// PopString retrieves and removes a string value from the session.
+	// Token returns a CSRF token for the given request.
+	// Exists returns true if the given key exists in the session.
 	td.Flash = app.Session.PopString(r.Context(), "flash")
 	td.Error = app.Session.PopString(r.Context(), "error")
 	td.Warning = app.Session.PopString(r.Context(), "warning")
@@ -50,7 +57,9 @@ func DefaultData(td *models.TemplateData, r *http.Request) *models.TemplateData 
 	return td
 }
 
-// Template renders the templates using html/template
+// Template executes a given template with the provided TemplateData and writes the output to the http.ResponseWriter.
+// If app.UseCache is true, it uses the template cache from app.TemplateCache, otherwise it creates a new cache using CreateTemplateCache().
+// It returns an error if the template cannot be found in the cache or if there is an error writing the template to the response writer.
 func Template(w http.ResponseWriter, r *http.Request, tmpl string, td *models.TemplateData) error {
 	var tc map[string]*template.Template
 
@@ -82,7 +91,10 @@ func Template(w http.ResponseWriter, r *http.Request, tmpl string, td *models.Te
 	return nil
 }
 
-// CreateTemplateCache creates a template cache as a map
+// CreateTemplateCache creates a map of pre-parsed templates by parsing all the page templates
+// and their corresponding layout templates. It returns a map of template names to their
+// corresponding *template.Template pointers. It also returns an error if any error occurs
+// while parsing the templates.
 func CreateTemplateCache() (map[string]*template.Template, error) {
 	layoutPath := fmt.Sprintf("%s/*.layout.tmpl", templatePath)
 	myCache := map[string]*template.Template{}
@@ -115,7 +127,7 @@ func CreateTemplateCache() (map[string]*template.Template, error) {
 	return myCache, nil
 }
 
-// Iterate returns a slice of ints, starting at 1, going to count
+// Iterate generates a slice of integers from 0 to count-1.
 func Iterate(count int) []int {
 	var i int
 	var items []int
@@ -125,6 +137,7 @@ func Iterate(count int) []int {
 	return items
 }
 
+// Add returns the sum of two integers.
 func Add(a, b int) int {
 	return a + b
 }

@@ -24,7 +24,9 @@ var app config.AppConfig
 var session *scs.SessionManager
 var infoLog, errorLog *log.Logger
 
-// main is the main function
+// main is the entry point of the web application.
+// It initializes the database connection, starts the mail listener,
+// and sets up the HTTP server to listen on the specified port.
 func main() {
 	db, err := run()
 	if err != nil {
@@ -45,6 +47,9 @@ func main() {
 	log.Fatal(err)
 }
 
+// run function initializes the application by setting up the session, logging, database connection, and other configurations.
+// It also reads command line flags to determine the application's environment and settings.
+// It returns a pointer to the database and an error if any.
 func run() (*driver.DB, error) {
 	// What is going to be put into the session
 	gob.Register(models.Reservation{})

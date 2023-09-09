@@ -7,7 +7,8 @@ import (
 	"github.com/nathanhannon/bed-and-breakfast/internal/helpers"
 )
 
-// NoSurf adds Cross-Site Request Forgery protection on every POST request
+// NoSurf adds CSRF protection to all POST requests
+// It returns a http.Handler that wraps the input http.Handler
 func NoSurf(next http.Handler) http.Handler {
 	csrfHandler := nosurf.New(next)
 
@@ -20,12 +21,13 @@ func NoSurf(next http.Handler) http.Handler {
 	return csrfHandler
 }
 
-// SessionLoad loads and saves the session data on every request
+// SessionLoad loads and saves the session on each request.
 func SessionLoad(next http.Handler) http.Handler {
 	return session.LoadAndSave(next)
 }
 
-// Auth ensures that only logged in users have access to certain routes
+// Auth is a middleware that checks if the user is authenticated before allowing access to the next handler.
+// If the user is not authenticated, it redirects them to the login page and sets an error message in the session.
 func Auth(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if !helpers.IsAuthenticated(r) {

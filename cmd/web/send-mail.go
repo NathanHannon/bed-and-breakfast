@@ -10,6 +10,7 @@ import (
 	mail "github.com/xhit/go-simple-mail/v2"
 )
 
+// listenForMail listens for incoming messages on the app.MailChannel and sends them using the sendMessage function.
 func listenForMail() {
 	go func() {
 		for {
@@ -19,6 +20,9 @@ func listenForMail() {
 	}()
 }
 
+// sendMessage sends an email using the provided MailData.
+// If a template is provided, it will be used to format the email content.
+// Otherwise, the content will be used as is.
 func sendMessage(m models.MailData) {
 	const mailTimeout = 10 * time.Second
 	server := mail.NewSMTPClient()

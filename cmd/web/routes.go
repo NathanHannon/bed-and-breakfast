@@ -9,6 +9,9 @@ import (
 	"github.com/nathanhannon/bed-and-breakfast/internal/handlers"
 )
 
+// routes sets up all the routes for the web application.
+// It returns an http.Handler that can be used to start the server.
+// It takes an *config.AppConfig as input parameter.
 func routes(app *config.AppConfig) http.Handler {
 	mux := chi.NewRouter()
 	fileServer := http.FileServer(http.Dir("./static/"))

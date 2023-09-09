@@ -14,12 +14,12 @@ type Form struct {
 	Errors errors
 }
 
-// Valid returns true if there are no errors, otherwise false
+// Valid returns true if there are no errors in the form, false otherwise.
 func (f *Form) Valid() bool {
 	return len(f.Errors) == 0
 }
 
-// New initializes a form struct
+// New creates a new Form instance with the provided data and an empty errors map.
 func New(data url.Values) *Form {
 	return &Form{
 		data,
@@ -27,7 +27,8 @@ func New(data url.Values) *Form {
 	}
 }
 
-// Required checks for required fields
+// Required checks if the specified fields in the form are not blank.
+// If any of the fields are blank, an error message is added to the form's Errors field.
 func (f *Form) Required(fields ...string) {
 	for _, field := range fields {
 		value := f.Get(field)
@@ -37,13 +38,15 @@ func (f *Form) Required(fields ...string) {
 	}
 }
 
-// Has checks if form field is in post and not empty
+// Has returns true if the form field with the given name has a non-empty value.
 func (f *Form) Has(field string) bool {
 	x := f.Get(field)
 	return x != ""
 }
 
-// MinLength checks string minimum length
+// MinLength checks if the value of the given field is at least of a certain length.
+// If the value is shorter than the given length, an error message is added to the form errors.
+// Returns true if the value is at least of the given length, false otherwise.
 func (f *Form) MinLength(field string, length int) bool {
 	x := f.Get(field)
 	if len(x) < length {
@@ -53,7 +56,8 @@ func (f *Form) MinLength(field string, length int) bool {
 	return true
 }
 
-// IsEmail checks for valid email address
+// IsEmail checks if the value of the given field is a valid email address.
+// If the value is not a valid email address, an error message is added to the form errors.
 func (f *Form) IsEmail(field string) {
 	if !govalidator.IsEmail(f.Get(field)) {
 		f.Errors.Add(field, "Invalid email address")

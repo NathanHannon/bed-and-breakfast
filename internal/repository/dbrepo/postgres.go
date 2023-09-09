@@ -14,7 +14,8 @@ func (m *postgresDBRepo) AllUsers() bool {
 	return true
 }
 
-// InsertReservation inserts a reservation into the database
+// InsertReservation inserts a new reservation into the database and returns the ID of the new reservation.
+// It takes a Reservation struct as input and returns an integer ID and an error if any.
 func (m *postgresDBRepo) InsertReservation(res models.Reservation) (int, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 	defer cancel()
@@ -40,7 +41,8 @@ func (m *postgresDBRepo) InsertReservation(res models.Reservation) (int, error) 
 	return newID, nil
 }
 
-// InsertRoomRestriction inserts a room restriction into the database
+// InsertRoomRestriction inserts a new room restriction into the database.
+// It takes a RoomRestriction struct as input and returns an error if there was any issue inserting the data.
 func (m *postgresDBRepo) InsertRoomRestriction(rest models.RoomRestriction) error {
 	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 	defer cancel()
